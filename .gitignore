@@ -1,0 +1,57 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+!/[Aa]ssets/**/*.meta
+
+# Uncomment if you use Asset Store Tools
+# [Aa]ssets/AssetStoreTools*
+
+# Rider plugin
+[Aa]ssets/Plugins/Editor/JetBrains*
+
+# VS cache
+.vs/
+
+# Gradle cache
+.gradle/
+
+# VS/MD/Consulo solution files
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+sysinfo.txt
+
+*.apk
+*.aab
+*.unitypackage
+
+crashlytics-build.properties
+
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+[Aa]ssets/StreamingAssets/aa.meta
+[Aa]ssets/StreamingAssets/aa/*
