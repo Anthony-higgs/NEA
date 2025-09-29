@@ -7,7 +7,7 @@ public class Grid2D : MonoBehaviour
     public Vector2 gridWorldSize = new Vector2(30, 30); // width/height in world units
     public float nodeRadius = 0.5f;                     // half tile size (tile size = 2*radius)
 
-    [Header("Blocking Layers (NO 'Player' layer here!)")]
+    [Header("Blocking Layers")]
     public LayerMask unwalkableMask; // check Wall + Obstacle only
 
     [Header("Diagonal Movement")]
@@ -18,7 +18,7 @@ public class Grid2D : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    // Optional: store a path for gizmo drawing
+    //store a path for gizmo drawing
     public List<Node> debugPath;
 
     void Awake()
@@ -82,7 +82,7 @@ public class Grid2D : MonoBehaviour
 
                 if (nx < 0 || nx >= gridSizeX || ny < 0 || ny >= gridSizeY) continue;
 
-                // optional: prevent ìcorner cuttingî through two touching walls
+                // optional: prevent ‚Äúcorner cutting‚Äù through two touching walls
                 if (preventDiagonalCornerCut && Mathf.Abs(dx) + Mathf.Abs(dy) == 2)
                 {
                     Node n1 = grid[node.gridX + dx, node.gridY];
