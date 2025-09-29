@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
-using UnityEditor; // only compiled in the Editor
+using UnityEditor; 
 #endif
 
 public class MainMenu : MonoBehaviour
