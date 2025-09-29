@@ -8,12 +8,12 @@ using UnityEditor; // only compiled in the Editor
 public class MainMenu : MonoBehaviour
 {
     [Header("Scene to load when Play is pressed")]
-    public string gameSceneName = "GameScene"; // change to the exact name of your gameplay scene
+    public string gameSceneName = "SampleScene";
 
     // Called by the Play button
     public void PlayGame()
     {
-        // Load the gameplay scene by name
+        // Load the gameplay scene
         SceneManager.LoadScene(gameSceneName);
     }
 
@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
         // In builds this quits the application
         Application.Quit();
 
-        // In the editor stop Play mode (so Quit does something while testing)
+        // In the editor stop play mode (so Quit does something while testing)
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #endif
