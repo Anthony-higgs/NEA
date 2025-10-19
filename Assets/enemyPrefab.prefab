@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1359933249707047034}
   - component: {fileID: 6637610972700898297}
   - component: {fileID: 8071808508903043392}
+  - component: {fileID: 8423636144566412923}
   m_Layer: 3
   m_Name: enemyPrefab
   m_TagString: Untagged
@@ -172,7 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cd77b2798460e4cbff19b967572b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  moveSpeed: 3
+  target: {fileID: 0}
+  isAttached: 0
 --- !u!114 &8071808508903043392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +191,16 @@ MonoBehaviour:
   damageOnHit: 10
   damageWhileAttached: 5
   attachDuration: 2
+--- !u!114 &8423636144566412923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293415059331432391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fad773cd85547d428e66fec757bad19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
