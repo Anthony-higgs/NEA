@@ -29,8 +29,13 @@ public class EnemyHealth : MonoBehaviour
     // Enemy death logic
     public void Die()
     {
-        // Notify whoever subscribed (like the spawner)
+        Debug.Log("enemy died");
+        // notify spawner
         onDeath?.Invoke();
+
+        // give player 10 gems
+        GemManager.Instance?.AddGems(10);
+        
 
         // Destroy this enemy
         Destroy(gameObject);

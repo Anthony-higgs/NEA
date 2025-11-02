@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using static EnemyHealth;
 public class EnemyMovement2D : MonoBehaviour
 {
+    private EnemyHealth health;
+    void Awake()
+    {
+        health = GetComponent<EnemyHealth>();
+    }
     [Header("Movement Settings")]
     public float moveSpeed = 3f; // how fast the enemy moves
 
@@ -92,7 +97,7 @@ public class EnemyMovement2D : MonoBehaviour
         isAttached = false;
 
         Debug.Log(name + ": Enemy dies after attaching");
-        Destroy(gameObject);           // remove enemy
+        health.Die();
     }
 }
 
