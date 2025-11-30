@@ -31,10 +31,15 @@ public class GemManager : MonoBehaviour
         Debug.Log("Gems: " + gems);
     }
 
-    public void SpendGems(int amount)
+    public bool SpendGems(int amount)
     {
-        gems = Mathf.Max(gems - amount, 0);
-        SaveGems();
+        if (gems >= amount)
+        {
+            gems -= amount;
+            SaveGems();
+            return true;
+        }
+        return false;
     }
 
     public void SaveGems()

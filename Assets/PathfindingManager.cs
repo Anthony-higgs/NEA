@@ -46,7 +46,7 @@ public class PathfindingManager : MonoBehaviour
         }
     }
 
-    // Simple A* pathfinding
+    //A* pathfinding
     List<Node> FindPath(Vector2 startPos, Vector2 targetPos)
     {
         Node startNode = grid.NodeFromWorldPoint(startPos);
@@ -121,7 +121,7 @@ public class PathfindingManager : MonoBehaviour
         return path;
     }
 
-    // Estimate distance between nodes (diagonal-friendly)
+    // Estimate distance between nodes
     int Heuristic(Node a, Node b)
     {
         int dx = Mathf.Abs(a.gridX - b.gridX);

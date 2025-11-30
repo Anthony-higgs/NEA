@@ -8,7 +8,7 @@ public class EnemyCollision2D : MonoBehaviour
     public float attachDuration = 2f;   // seconds to stick to player
     private EnemyHealth health;
     private bool isAttached = false;
-
+    public FuelTank fuelTank;
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !isAttached)
@@ -21,6 +21,10 @@ public class EnemyCollision2D : MonoBehaviour
 
                 // Phase 2: attach to player
                 StartCoroutine(AttachToPlayer(collision.gameObject, player));
+            }
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                fuelTank.TakeDamage(10);
             }
             else
             {
