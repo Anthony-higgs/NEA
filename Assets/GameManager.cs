@@ -20,10 +20,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over! Stopping everything...");
-        Time.timeScale = 0f; // freezes the game
-
-        // Here i could load a Game Over screen, or restart
-        // SceneManager.LoadScene("GameOverScene");
+        Debug.Log("Game Over! Stopping everything...");      
+        SceneManager.LoadScene("GameOverScene");
     }
 }

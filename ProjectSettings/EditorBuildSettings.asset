@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Armory.unity
     guid: 679a10f6163d10a40b22a0fe4351544d
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: b199dcd196d450d409a08b5be4a7cdfb
   m_configObjects: {}
