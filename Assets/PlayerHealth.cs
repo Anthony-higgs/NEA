@@ -3,12 +3,15 @@ using UnityEngine.SceneManagement; // for when i want to reload or change scenes
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int baseMaxHealth = 100;
     public int currentHealth;
-
+    public int armorUpgradeBonus = 50;
     void Awake()
     {
-        currentHealth = maxHealth;
+        
+            currentHealth = baseMaxHealth;
+        
+
     }
 
     public void TakeDamage(int damage)
@@ -21,7 +24,11 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
-
+    public void ApplyArmorUpgrade(bool hasArmor)
+    {
+        int maxHealth = hasArmor ? baseMaxHealth + armorUpgradeBonus : baseMaxHealth;
+        currentHealth = maxHealth; // refill on apply
+    }
     void Die()
     {
         Debug.Log("Player died!");

@@ -2,51 +2,75 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Spawner Settings")]
-    public GameObject enemyPrefab;      // prefab to spawn
-    public Transform[] spawnPoints;     // locations to spawn at
-    public Transform player;            // player reference
-    public float spawnInterval = 3f;    // time between spawns
-    public float activationRange = 15f; // only spawn if player is in range
+    [Header("Spawning")]
+    public GameObject enemyPrefab;        // prefab only (do not destroy)
+    public Transform[] spawnPoints;       // spawn locations
+    public Transform player;              // player reference
 
-    private float nextSpawnTime;        // timer for next spawn
+    [Header("Timing & Range")]
+    public float spawnInterval = 3f;
+    public float activationRange = 15f;
+    public int maxEnemiesAlive = 5;       // prevents infinite spawning
+
+    private float nextSpawnTime;
 
     void Update()
     {
-        // Make sure references exist
-        if (player == null || spawnPoints.Length == 0 || enemyPrefab == null) return;
+        // Safety checks
+        if (player == null || enemyPrefab == null || spawnPoints.Length == 0)
+            return;
 
+        // Check distance to player
         float dist = Vector2.Distance(transform.position, player.position);
-        
+        if (dist > activationRange)
+            return;
 
-        // Only spawn if player is close enough
-        if (dist <= activationRange)
+        // Count current enemies in the scene
+        int enemiesAlive = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (enemiesAlive >= maxEnemiesAlive)
+            return;
+
+        // Spawn timer
+        if (Time.time >= nextSpawnTime)
         {
-            if (Time.time >= nextSpawnTime)
-            {
-                SpawnEnemy();
-                nextSpawnTime = Time.time + spawnInterval;
-            }
+            SpawnEnemy();
+            nextSpawnTime = Time.time + spawnInterval;
         }
     }
 
     void SpawnEnemy()
     {
-        // pick a random spawn point
+        // Pick random spawn point
         Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+        // Spawn enemy
         GameObject enemyGO = Instantiate(enemyPrefab, spawn.position, Quaternion.identity);
 
-        // assign player as target and register with PathfindingManager
+        // Make sure enemy is tagged
+        enemyGO.tag = "Enemy";
+
+        // Initialise movement
         EnemyMovement2D movement = enemyGO.GetComponent<EnemyMovement2D>();
-        if (movement != null)
+        if (movement == null)
         {
-            movement.target = player;
-            FindObjectOfType<PathfindingManager>()?.RegisterEnemy(movement);
-            Debug.Log("Spawned enemy at " + spawn.position);
+            Debug.LogError("Enemy prefab missing EnemyMovement2D!");
+            return;
+        }
+
+        // this should fix the issue with enemy prefabs 
+        movement.Init(player);
+
+        // Register with pathfinding
+        PathfindingManager pf = FindObjectOfType<PathfindingManager>();
+        if (pf != null)
+        {
+            pf.RegisterEnemy(movement);
         }
         else
         {
-            Debug.LogError("Spawned enemy has no EnemyMovement2D");
+            Debug.LogError("PathfindingManager not found in scene!");
         }
+
+        Debug.Log("Enemy spawned at " + spawn.position);
     }
 }

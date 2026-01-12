@@ -13,6 +13,13 @@ public class EnemyMovement2D : MonoBehaviour
 
     [Header("Target")]
     public Transform target; // the player this enemy should follow
+    private bool initialised = false;
+
+    public void Init(Transform playerTarget)
+    {
+        target = playerTarget;
+        initialised = true;
+    }
 
     [Header("Status")]
     public bool isAttached = false; // is the enemy currently attached to the player?
@@ -38,8 +45,13 @@ public class EnemyMovement2D : MonoBehaviour
 
     void Update()
     {
+        if (!initialised || target == null)
+        {
+            Debug.Log("Target not initialised or null");
+            return;
+        }
         // If attached, no path, or no target, don't move
-        if (isAttached || target == null || path == null || path.Count == 0) return;
+        if (isAttached || path == null || path.Count == 0) return;
 
         // If reached the end of the path, stop moving
         if (currentWaypoint >= path.Count)
