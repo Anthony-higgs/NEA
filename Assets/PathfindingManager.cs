@@ -11,7 +11,7 @@ public class PathfindingManager : MonoBehaviour
     private float nextRepathTime;             // timer for next path calculation
     private List<EnemyMovement2D> enemies = new List<EnemyMovement2D>(); // all registered enemies
 
-    // Call this when a new enemy spawns
+    // Call this when a new enemy spawns to register them
     public void RegisterEnemy(EnemyMovement2D enemy)
     {
         if (!enemies.Contains(enemy))
@@ -55,7 +55,7 @@ public class PathfindingManager : MonoBehaviour
 
         if (!startNode.walkable)
         {
-            Debug.LogWarning("PathfindingManager: Start node blocked at " + startNode.worldPosition);
+            Debug.LogWarning("Start node blocked at " + startNode.worldPosition);
             return null;
         }
 

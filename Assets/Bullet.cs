@@ -25,11 +25,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            // does a third of the enemys health when colliding with the enemy
             EnemyHealth health = collision.GetComponent<EnemyHealth>();
             if (health != null)
                 health.TakeDamage(1);
             Debug.Log("Collided with enemy");
-            //replace with damaging the enemy
+            
             Destroy(gameObject);
         }
     }

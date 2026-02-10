@@ -21,8 +21,8 @@ public class EnemyMovement2D : MonoBehaviour
         initialised = true;
     }
 
-    [Header("Status")]
-    public bool isAttached = false; // is the enemy currently attached to the player?
+    
+    public bool isAttached = false; //is the enemy holding onto player
 
     private List<Node> path; // the path this enemy will follow
     private int currentWaypoint = 0; // which node along the path we're heading to
@@ -30,6 +30,7 @@ public class EnemyMovement2D : MonoBehaviour
     // Called when PathfindingManager computes a new path
     public void SetPath(List<Node> newPath)
     {
+        //checks if there is a path to the palyer
         if (newPath == null || newPath.Count == 0)
         {
             Debug.Log(name + ": Received empty path");
@@ -40,14 +41,14 @@ public class EnemyMovement2D : MonoBehaviour
 
         path = newPath;
         currentWaypoint = 0;
-        Debug.Log(name + ": New path received! Steps: " + path.Count);
+        Debug.Log(name + ": New path received, Steps: " + path.Count);
     }
 
     void Update()
     {
         if (!initialised || target == null)
         {
-            Debug.Log("Target not initialised or null");
+            Debug.Log("Target isnt initialized or is null");
             return;
         }
         // If attached, no path, or no target, don't move

@@ -10,7 +10,7 @@ public class EndZone : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        Debug.Log("LEVEL COMPLETE!");
+        Debug.Log("level completed");
 
         // Save next level
         PlayerPrefs.SetInt("currentLevel", nextLevelIndex);
