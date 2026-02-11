@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public PlayerHealth playerHealth;
     public PlayerMovement2D playerMovement;
     public PlayerFuel playerFuel;
-    public GemManager gemManager;
+    
 
     private void Update()
     {
@@ -24,7 +24,5 @@ public class UIManager : MonoBehaviour
         if (playerFuel != null)
             fuelText.text = "Fuel: " + Mathf.Round(playerFuel.currentFuel);
 
-        if (gemManager != null)
-            gemsText.text = "Gems: " + gemManager.gems;
     }
 }

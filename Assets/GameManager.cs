@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // "singleton" so i can access it anywhere
+    public static GameManager Instance; // singleton so i can access it anywhere
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // keep between scenes if needed
+            DontDestroyOnLoad(gameObject); // keep between scenes
         }
         else
         {
@@ -22,5 +22,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over! Stopping everything...");      
         SceneManager.LoadScene("GameOverScene");
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

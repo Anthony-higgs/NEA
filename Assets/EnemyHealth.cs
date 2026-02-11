@@ -35,7 +35,9 @@ public class EnemyHealth : MonoBehaviour
 
         // give player 10 gems
         GemManager.Instance?.AddGems(10);
-        
+
+        // update the ui
+        FindObjectOfType<GemUI>()?.UpdateUI();
 
         // Destroy this enemy
         Destroy(gameObject);

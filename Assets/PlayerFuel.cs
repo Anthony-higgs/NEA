@@ -9,11 +9,28 @@ public class PlayerFuel : MonoBehaviour
     public float fuelUsageRate = 5f;     // How fast fuel drains per second when moving
 
     [Header("References")]
-    public PlayerMovement2D playerMovement; // The script that handles movement
+    public PlayerMovement2D playerMovement; 
     public PlayerCollision playerCollision;
+
+    
     void Start()
     {
-        currentFuel = baseMaxFuel;
+        if (UpgradeManager.Instance == null)
+        {
+            Debug.LogError("UpgradeManager missing!");
+            return;
+        }
+        bool hasFuelTank = UpgradeManager.Instance.fuelTankUnlocked;
+        if (!hasFuelTank)
+        {
+            currentFuel = baseMaxFuel;
+        }
+        else
+        {
+            ApplyFuelUpgrade(hasFuelTank);
+        }
+
+            
 
         // assign movement and collision scripts
         if (playerMovement == null)
@@ -31,24 +48,22 @@ public class PlayerFuel : MonoBehaviour
             Debug.Log("Fuel used");
             currentFuel -= fuelUsageRate * Time.deltaTime;
 
-            // Prevent negative fuel
+            // stops the car when out of fuel
             if (currentFuel <= 0)
             {
                 currentFuel = 0;
+                playerMovement.currentSpeed = 0f;
                 StopMovement();
             }
         }
     }
-    public void ForceOutOfFuel()
-    {
-        currentFuel = 0;
-        StopMovement();
-    }
+   
 
     public void ApplyFuelUpgrade(bool hasFuelTank)
     {
         float maxFuel = hasFuelTank ? baseMaxFuel + fuelUpgradeBonus : baseMaxFuel;
         currentFuel = maxFuel; // refill on apply
+        Debug.Log(currentFuel);
     }
 
 
@@ -59,7 +74,6 @@ public class PlayerFuel : MonoBehaviour
         if (playerMovement != null)
         {
             playerMovement.enabled = false; // stops car control
-            playerCollision.enabled = false;
         }
     }
 }

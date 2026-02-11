@@ -18,18 +18,21 @@ public class EnemySpawner : MonoBehaviour
     {
         // Safety checks
         if (player == null || enemyPrefab == null || spawnPoints.Length == 0)
+        {
             return;
-
+        }
         // Check distance to player
         float dist = Vector2.Distance(transform.position, player.position);
         if (dist > activationRange)
+        {
             return;
-
+        }
         // Count current enemies in the scene
         int enemiesAlive = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (enemiesAlive >= maxEnemiesAlive)
+        {
             return;
-
+        }
         // Spawn timer
         if (Time.time >= nextSpawnTime)
         {
@@ -53,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         EnemyMovement2D movement = enemyGO.GetComponent<EnemyMovement2D>();
         if (movement == null)
         {
-            Debug.LogError("Enemy prefab missing EnemyMovement2D!");
+            Debug.LogError("Enemy prefab missing EnemyMovement script");
             return;
         }
 
@@ -68,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PathfindingManager not found in scene!");
+            Debug.LogError("PathfindingManager not found in scene");
         }
 
         Debug.Log("Enemy spawned at " + spawn.position);

@@ -5,12 +5,12 @@ public class LevelSelectManager : MonoBehaviour
 {
     public void LoadLevel(string levelName)
     {
-        // Save the selected level name 
-        PlayerPrefs.SetString("LastSelectedLevel", levelName);
-        PlayerPrefs.Save(); // make sure it’s written to disk
-
-        // Load that level immediately
         SceneManager.LoadScene(levelName);
+
+        // Extract number from the selected level.
+        int levelNumber = int.Parse(levelName.Replace("Level", ""));
+        PlayerPrefs.SetInt("currentLevel", levelNumber);
+        PlayerPrefs.Save();
     }
 
     public void BackToMenu()

@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public string gameSceneName = "MainMenu";
+    public string menuScene = "MainMenu";
+
     public void RestartLevel()
     {
-        // Check if there's a saved level
-        string lastLevel = PlayerPrefs.GetString("LastSelectedLevel", "Level1");
-        SceneManager.LoadScene(lastLevel);
+        int level = PlayerPrefs.GetInt("currentLevel", 1);
+        Debug.Log("Restarting Level " + level);
+
+        SceneManager.LoadScene("Level" + level);
     }
+
     public void ToMenu()
     {
-        
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadScene(menuScene);
     }
 }

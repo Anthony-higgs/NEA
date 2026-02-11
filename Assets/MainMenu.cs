@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [Header("Scene to load when Play is pressed")]
-    public string gameSceneName = "SampleScene";
+    public string gameSceneName = "Level1";
 
     [Header("Scene to load when Armory is pressed")]
     public string gameSceneName1 = "Armory";
@@ -15,11 +15,10 @@ public class MainMenu : MonoBehaviour
     // Called by the Play button
     public void PlayGame()
     {
-        // Check if there's a saved level
-        string lastLevel = PlayerPrefs.GetString("LastSelectedLevel", "Level1");
+        int level = PlayerPrefs.GetInt("currentLevel", 1);
+        Debug.Log("Playing Level " + level);
 
-        // Load that level (default to Level1 if none saved)
-        SceneManager.LoadScene(lastLevel);
+        SceneManager.LoadScene("Level" + level);
     }
 
     // Armory button
@@ -39,5 +38,28 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Quit!");
         Application.Quit();
+    }
+    //to reset all upgrades and gems
+    public void ResetProgress()
+    {
+        // Reset UpgradeManager bools in memory
+        if (UpgradeManager.Instance != null)
+        {
+            UpgradeManager.Instance.fuelTankUnlocked = false;
+            UpgradeManager.Instance.ArmorUnlocked = false;
+            UpgradeManager.Instance.TurretUnlocked = false;
+        }
+
+        // Reset PlayerPrefs so upgrades are not loaded next time
+        PlayerPrefs.SetInt("FuelTankUnlocked", 0);
+        PlayerPrefs.SetInt("ArmorUnlocked", 0);
+        PlayerPrefs.SetInt("TurretUnlocked", 0);
+        PlayerPrefs.SetInt("PlayerGems", 0);
+        PlayerPrefs.DeleteAll();
+        
+
+        PlayerPrefs.Save();
+
+        
     }
 }

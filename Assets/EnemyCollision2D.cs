@@ -8,7 +8,7 @@ public class EnemyCollision2D : MonoBehaviour
     public float attachDuration = 2f;   // seconds to stick to player
     private EnemyHealth health;
     private bool isAttached = false;
-    public FuelTank fuelTank;
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !isAttached)
@@ -22,10 +22,7 @@ public class EnemyCollision2D : MonoBehaviour
                 // Phase 2: attach to player
                 StartCoroutine(AttachToPlayer(collision.gameObject, player));
             }
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                fuelTank.TakeDamage(10);
-            }
+            
             else
             {
                 // This will print the object name if it doesn’t have PlayerHealth
@@ -54,11 +51,17 @@ public class EnemyCollision2D : MonoBehaviour
             player.TakeDamage(damageWhileAttached);
 
         // Detach enemy
-        transform.SetParent(null);
+        if (transform != null)
+        {
+            transform.SetParent(null);
+        }
 
         // Enemy dies immediately after detaching
         Debug.Log($"{gameObject.name} died after detaching from player!");
-        health.Die();
+        if (health != null)
+        {
+            health.Die();
+        }
     }
 
 }

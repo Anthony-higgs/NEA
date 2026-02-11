@@ -26,7 +26,10 @@ public class PlayerUpgradeLoader : MonoBehaviour
         TurretObject.SetActive(hasTurret);
         // Apply fuel upgrade
         if (playerFuel != null)
+        {
             playerFuel.ApplyFuelUpgrade(hasFuelTank);
+            Debug.Log("Fuel upgrade applied");
+        }
         if (playerHealth != null)
             playerHealth.ApplyArmorUpgrade(hasArmor);
     }

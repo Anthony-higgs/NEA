@@ -7,6 +7,7 @@ public class EnemyMovement2D : MonoBehaviour
     void Awake()
     {
         health = GetComponent<EnemyHealth>();
+        
     }
     [Header("Movement Settings")]
     public float moveSpeed = 3f; // how fast the enemy moves
@@ -19,6 +20,7 @@ public class EnemyMovement2D : MonoBehaviour
     {
         target = playerTarget;
         initialised = true;
+        Debug.Log("Target initialised");
     }
 
     
@@ -46,9 +48,14 @@ public class EnemyMovement2D : MonoBehaviour
 
     void Update()
     {
-        if (!initialised || target == null)
+        if (!initialised)
         {
-            Debug.Log("Target isnt initialized or is null");
+            Debug.Log("Target isnt initialized");
+            return;
+        }
+        if (target == null)
+        {
+            Debug.Log("Target null");
             return;
         }
         // If attached, no path, or no target, don't move
